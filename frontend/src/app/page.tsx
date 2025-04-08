@@ -19,8 +19,13 @@ export default function Home() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
 
   useEffect(() => {
+    // Adicionando o cabeçalho 'ngrok-skip-browser-warning' na requisição
     axios
-      .get(`${API_URL}/clientes`)
+      .get(`${API_URL}/clientes`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true' // Adicionando o cabeçalho
+        }
+      })
       .then((response) => setClientes(response.data))
       .catch((error) => console.error("Erro ao buscar clientes", error));
   }, []);
